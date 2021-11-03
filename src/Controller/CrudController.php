@@ -99,8 +99,8 @@ class CrudController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($product);
         $em->flush();
-
-        return $this->redirect($this->generateUrl('crud.get'));
+        $this->addFlash('success', 'Product Deleted!');
+        return $this->redirect($this->generateUrl('crud.getAll'));
     }
 }
 

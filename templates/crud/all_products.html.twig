@@ -10,14 +10,32 @@
         </div>
     {% endfor %}
     <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
         {% for p in products %}
-            <a href="{{ path('crud.details', {id: p.id}) }}">
-                {{ p.name }}
-            </a>
-            <a href="{{ path('crud.delete', {id: p.id}) }}">
-                Delete
-            </a>
 
+                <tr>
+                    <th scope="row">{{ p.id }}</th>
+                    <td>
+                        <a href="{{ path('crud.details', {id: p.id}) }}">
+                            {{ p.name }}
+                        </a>
+                    </td>
+                    <td>
+                        <a class="text-danger" href="{{ path('crud.delete', {id: p.id}) }}">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
         {% endfor %}
+                </tbody>
+            </table>
     </div>
 {% endblock %}
