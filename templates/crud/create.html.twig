@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CrudController!{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {#        <div class="flash-notice">#}
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div>
+        {{ form(product_create_form) }}
+    </div>
+{% endblock %}

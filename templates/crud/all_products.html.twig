@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CrudController!{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+{#        <div class="flash-notice">#}
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div>
+        {% for p in products %}
+            <a href="{{ path('crud.details', {id: p.id}) }}">
+                {{ p.name }}
+            </a>
+            <a href="{{ path('crud.delete', {id: p.id}) }}">
+                Delete
+            </a>
+
+        {% endfor %}
+    </div>
+{% endblock %}
