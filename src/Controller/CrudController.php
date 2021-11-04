@@ -70,7 +70,7 @@ class CrudController extends AbstractController
     /**
      * @Route("/update/{id}")
      */
-    public function update($id): Response
+    public function update($id, Request $request): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $product = $entityManager->getRepository(Product::class)->find($id);
@@ -81,7 +81,19 @@ class CrudController extends AbstractController
             );
         }
 
-        $product->setName('New product name!');
+        $form = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()){
+            $entityManager->flush();
+            $this->addFlash('success', 'Product Updated!');
+            return $this->redirect($this->generateUrl('crud.details', ['id' => $product->getId()]));
+        }
+
+        return $this->render('crud/create.html.twig', [
+            'product_create_form' => $form->createView()
+        ]);
+
         $entityManager->flush();
 
         return $this->redirectToRoute('crud/product_details.html.twig', [
@@ -103,5 +115,3 @@ class CrudController extends AbstractController
         return $this->redirect($this->generateUrl('crud.getAll'));
     }
 }
-
-

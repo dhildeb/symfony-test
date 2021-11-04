@@ -14,4 +14,5 @@
         <label>Description</label>
         <p>{{ product.description }}</p>
     </div>
+    <a href="{{ path('crud.app_crud_update', {id: product.id}) }}">Edit</a>
 {% endblock %}
